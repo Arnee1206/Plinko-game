@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Social Plinko</title>
+    
+    <script src="/javascripts/phaser.min.js"></script>
+    <script type="text/javascript" src="/javascripts/phaser.2.2.2.box2d.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-animate.js"></script>
+    
+    <script src="/javascripts/display.js"></script>
+    <script src="/javascripts/directives.js"></script>
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body ng-app="app">
+    <div class="container">
+      
+      <div ng-controller="betting">
+        <div class="toprow row">
+          <div class="col s3  hide-on-small-only">
+            <recentlist></recentlist>
+            <div class="section betcol card toprow">
+              <span>Username: {{name ? name : socketid}}</span><br>
+              <span>Credits: {{credits ? credits : '...'}}</span><br>
+              <span ng-if="!bettingTime">Betting is closed</span>
+              <span ng-if="bettingTime">Betting is open: {{elapsedMs/1000}}</span>
+              <div class="progress">
+                  <div ng-if="bettingTime" class="determinate" style="width: {{(elapsedMs)/100}}%"></div>
+              </div>
+            </div>
+          </div>
+          <div ng-controller="game" class="col s12 m4 offset-m1">
+            <div class="gamecanvas">
+              <div id="canvas"></div>
+            </div>
+          </div>
+
+          <chatbox></chatbox>
+        </div>
+       
+
+        <div class="row">
+          <div class="col s12">
+            <div class="betcol card">
+              <button ng-click="adjBet('clear')" class="waves-effect waves-light btn green accent-2">Clear</button>
+              <button ng-click="adjBet(1)" class="waves-effect waves-light btn green accent-2">+1</button>
+              <button ng-click="adjBet(10)" class="waves-effect waves-light btn green accent-2">+10</button>
+              <button ng-click="adjBet(25)" class="waves-effect waves-light btn green accent-2">+25</button>
+              <button ng-click="adjBet('half')" class="waves-effect waves-light btn green accent-2">1/2</button>
+              <button ng-click="adjBet('double')" class="waves-effect waves-light btn green accent-2">x2</button>
+              <span class="hide-on-med-and-up">Credits: {{credits ? credits : '...'}}</span>
+              <input ng-model="betAmount" type="number" autocomplete="off" min="1" max="{{credits}}" pattern="\d*" placeholder="Enter bet amount..">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+
+          <div class="col s4">
+            <div class="betcol card" ng-class="payout == 'left' ? 'payout' : ''">
+              <form ng-submit="leftBet(betAmount)">
+                <button ng-class="bettingTime ? '' : 'disabled'" class="col s12 waves-effect waves-light btn green accent-2">Left</button>
+              </form>
+              <br><span>Total: <span count-to="{{leftBets.total}}" value="{{leftBets.last}}" duration="0.25"></span></span>
+              
+              <ul>
+                <li class="transition" ng-repeat="x in leftBets.list track by $index">{{x}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col s4">
+            <div class="betcol card" ng-class="payout == 'middle' ? 'payout' : ''">
+              <form ng-submit="midBet(betAmount)">
+                <button ng-class="bettingTime ? '' : 'disabled'" class="col s12 waves-effect waves-light btn green accent-2">Middle</button>
+              </form>
+              <br><span>Total: <span count-to="{{midBets.total}}" value="{{midBets.last}}" duration="0.25"></span></span>
+              <ul>
+                <li class="transition" ng-repeat="x in midBets.list track by $index">{{x}}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col s4">
+            <div class="betcol card" ng-class="payout == 'right' ? 'payout' : ''">
+              <form ng-submit="rightBet(betAmount)">
+                <button ng-class="bettingTime ? '' : 'disabled'" class="col s12 waves-effect waves-light btn green accent-2">Right</button>
+              </form>
+              <br><span>Total: <span count-to="{{rightBets.total}}" value="{{rightBets.last}}" duration="0.25"></span></span>
+              <ul>
+                <li class="transition" ng-repeat="x in rightBets.list track by $index">{{x}}</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+        <div id="login" class="modal">
+          <div class="modal-content">
+            <form class="row" ng-submit="login(entered)">
+              <h3 class="removebot blackt center-align">Enter a nickname</h3><br>
+              <input class="col s10 offset-s1 blackt center-align" ng-model="entered" minlength="2" maxlength="8" autofocus required><br>
+              <button type="submit" class="col s10 offset-s1 waves-effect waves-light btn green accent-2">Submit</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    
+
+    <script src="/javascripts/script.js"></script>
+  </body>
+</html>

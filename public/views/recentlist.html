@@ -1,0 +1,5 @@
+<div class="section betcol card">
+  <ul>
+    <li class="animate" ng-repeat="x in recent | limitTo : 10  track by $index"><h6 class="center-align" ng-style="{'opacity': (1-(.1*$index))}">{{x}}<span></li>
+  </ul>
+</div>

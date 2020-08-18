@@ -1,0 +1,127 @@
+body {
+	background-color: #564285;
+	color: #80E680;
+}
+
+.betcol {
+	color: #1c252f;
+	background-color: #f2f2f2;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px;
+	padding: 4px;
+	margin: auto;
+
+}
+
+.toprow {
+	margin-top: 3%;
+}
+
+.chat {
+  padding-bottom: 0px
+	margin-bottom: 0px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.input {
+	padding: 0px !important;
+	margin-bottom: 0px !important;
+}
+#chat{
+  display:block;
+
+  height:280px;
+  word-wrap: break-word;
+  overflow-y:scroll;
+  overflow-x:hidden;
+  padding-bottom: 0px
+	margin-bottom: 0px;
+}
+
+
+.payout {
+	border-color: #69f0ae;
+	border-width: 4px;
+}
+
+.new-message {
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 0px
+	margin-bottom: 0px;
+}
+
+.gamecanvas {
+	margin: auto;
+}
+
+canvas {
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.transition.ng-enter,
+.transition.ng-leave
+{
+    -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-overflow: clip;
+    white-space:nowrap;
+}
+
+.transition.ng-leave.transition.ng-leave-active,
+.transition.ng-enter {
+    opacity: 0;
+    width: 0px;
+    height: 0px;
+}
+
+.transition.ng-enter.transition.ng-enter-active,
+.transition.ng-leave {
+    opacity: 1;
+    width: 150px;
+    height: 30px;
+}
+
+.animate.ng-enter, 
+.animate.ng-leave
+{ 
+    -webkit-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -moz-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -ms-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    -o-transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+    transition: 500ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+} 
+ 
+.animate.ng-enter {
+    top: -100%;
+}
+.animate.ng-enter.transition.ng-enter-active {
+    top: 0;
+}
+ 
+.animate.ng-leave {
+    top: 0;
+}
+.animate.ng-leave.transition.ng-leave-active {
+    top: 100%;
+}
+
+.blackt {
+	color: black !important;
+}
+
+.removebot {
+	margin-bottom: 0px !important;
+}
